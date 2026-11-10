@@ -1,0 +1,71 @@
+# Node.js 학습 및 Notion 관리 지침
+
+## 목적과 학습 방식
+
+이 저장소는 Node.js Core로 런타임 동작을 이해하고 파일 처리 HTTP 서버를 구현하는 학습 공간이다. 사용자는 React, Promise, API 호출, Docker와 Kubernetes 경험이 있다. JavaScript 기초를 반복하기보다 서버 동작의 원인을 추론하고 실험으로 검증하도록 돕는다.
+
+- 개념 설명 → 코드 실행 순서·결과 예측 → 사용자 직접 구현 → 실행 결과 분석 → 코드 리뷰 → 개념 재정리 순서로 진행한다.
+- 정답 코드나 완성 서버를 먼저 제공하지 않는다. 사용자가 요청하거나 구현 후 리뷰에 필요한 경우 단계적으로 설명한다.
+- Node.js LTS, JavaScript ESM, curl, VS Code와 내장 모듈을 사용한다. 자동 테스트는 node:test를 사용한다.
+- Express/NestJS, DB/ORM, JWT/인증은 이번 학습 범위에서 제외한다. Worker Threads 구현은 선택 과제다.
+- ESM 최상위와 콜백 내부의 실행 맥락을 구분하며, 한 번 관찰한 타이머 실행 순서를 보장된 규칙으로 단정하지 않는다.
+
+## 이어서 관리할 Notion 페이지
+
+- 부모 페이지: Sprint
+- 부모 ID: `414c041b-70ec-8082-9b83-f8c0c2d8a617`
+- 부모 URL: https://www.notion.so/414c041b70ec80829b83f8c0c2d8a617
+- 학습 페이지: nodejs-sprint
+- 학습 페이지 ID: `414c041b-70ec-8100-bb1a-c27507f18bff`
+- 학습 페이지 URL: https://www.notion.so/414c041b70ec8100bb1ac27507f18bff
+- 작성 당시 GitHub origin: https://github.com/Kim-soung-won/nest-sprint
+
+저장소 폴더명은 nodejs-sprint지만 원격 저장소 이름은 nest-sprint였다. 원격 작업 전 실제 git remote를 확인한다.
+
+## 일주일 학습 계획
+
+원래 3일 집중 커리큘럼을 7일로 확장했다. 계획 기간은 **2026-11-10~2026-11-16**, 하루 2시간, 총 14시간이며 시간대는 Asia/Seoul이다. 다른 날 접속했다고 일정을 자동으로 오늘 기준으로 옮기지 않는다. 일정 변경 요청이 있으면 기존 페이지에서 수정한다.
+
+| Day | 날짜 | 주제 | 결과물 및 완료 기준 |
+| --- | --- | --- | --- |
+| 1 | 2026-11-10 | V8, libuv, Event Loop, Promise, nextTick | ESM 실행 순서 예측·관찰 기록, 실행 맥락 설명 |
+| 2 | 2026-11-11 | CPU 블로킹, 동시 요청, 선택적 Worker Thread | /fast와 /cpu 지연 비교, async와 비동기 I/O 차이 설명 |
+| 3 | 2026-11-12 | HTTP 생명주기, Buffer, 파일 API | /health, /files, /upload, /download/:name, /error 구현 및 curl 결과 |
+| 4 | 2026-11-13 | Stream, Buffer, 메모리 비교 | 약 500MB 파일로 readFile과 pipeline 비교, rss·heapUsed·external 측정 |
+| 5 | 2026-11-14 | Backpressure, 연결 중단, 오류 | write(false)·drain, 느린 수신, 동기·비동기·Stream 오류 기록 |
+| 6 | 2026-11-15 | 타임아웃, SIGTERM/SIGINT, 정상 종료 | 진행 요청 완료와 종료 제한시간에 따른 정리 검증 |
+| 7 | 2026-11-16 | 통합 테스트, 문서화, 회고 | node:test 통과, API 예제, 성능·메모리·종료 실험과 README |
+
+## Notion 페이지 관리 절차
+
+1. 학습 재개 시 이 파일과 저장소 코드·실험 기록을 읽고, 연결된 Notion 도구로 위 학습 페이지 ID를 직접 조회한다. 검색으로 같은 이름의 페이지를 새로 만들지 않는다.
+2. Notion의 현재 일정, 체크리스트, 실험 기록과 코드 상태를 대조해 다음 학습 지점을 판단한다. 사용자 작성 내용과 최신 수정은 보존한다.
+3. 학습 진도와 기록은 사용자의 학습 관리 요청 범위에서 같은 페이지에 갱신한다. 관련 없는 페이지, 공유 권한, 외부 알림은 변경하지 않는다.
+4. 완료 표시는 코드, 실행 결과 또는 사용자 확인으로 입증된 항목만 적용한다. 날짜 경과나 코드 파일 존재만으로 완료 처리하지 않는다. 날짜별 계획과 최종 역량 체크리스트를 구분한다.
+5. 실험 기록은 질문/가설, 환경(Node.js 버전·OS·ESM 여부), 실행 명령/조건, 예상과 이유, 관찰 결과, 차이의 원인, 결론, 코드/커밋 링크 순서로 남긴다. 측정값과 테스트 성공을 꾸며내지 않는다.
+6. 수정 전에 Notion 도구의 현재 Markdown 명세와 필요한 스킬 지침을 읽는다. 전체 페이지 교체보다 대상 구간 수정이나 기록 추가를 우선한다. 전체 교체가 필요하면 기존 본문과 하위 페이지 링크를 빠짐없이 보존한다.
+7. 쓰기 결과가 불확실하면 페이지를 다시 조회한 뒤 누락된 작업만 이어간다. 성공 여부가 불분명하다고 중복 페이지나 기록을 생성하지 않는다.
+8. 수정 후 내용을 다시 조회해 확인하고 사용자에게 페이지 링크와 변경 내용을 짧게 안내한다. 페이지 패널 도구가 있으면 같은 페이지를 열어 보여준다.
+
+### 다른 컴퓨터에서 연결하기
+
+- 이 파일은 페이지 식별자와 관리 규칙을 보관한다. Notion 인증 정보나 접근 권한을 제공하지는 않는다.
+- 새 컴퓨터의 에이전트에서 Notion 연결을 활성화하고 위 페이지에 접근 가능한 계정으로 인증한다. 토큰과 비밀 정보는 저장소에 기록하지 않는다.
+- Notion 도구가 없거나 접근이 실패하면 저장소 안에서 학습과 기록을 계속하고, 동기화하지 못한 항목을 사용자에게 알린다. 실제로 저장하지 못한 내용을 Notion에 반영했다고 말하지 않는다.
+- 당시 학습 페이지는 일정표, 날짜별 접이식 실습 가이드, 실험 기록 양식, 최종 체크리스트, 목표 프로젝트 구조, 공식 문서 링크로 구성했다. 최신 상태는 재조회한 페이지를 기준으로 한다.
+
+## 초기 상태와 최종 결과물
+
+매 학습 세션의 마무리는 [마무리 Q&A 지침](./learning-review.md)에 따라 대화로 이해도를 확인한다. 구현 완료와 이해도 확인은 별도로 기록하며, 확인된 약점은 다음 세션의 복습 문제로 연결한다.
+
+이 지침 작성 시 실제 학습 완료는 확인되지 않았다. 첫 활동은 Node.js 버전을 기록하고 Event Loop 출력 순서를 실행 전에 예측하는 것이다. 이후 상태는 이 문장의 초기 상태가 아니라 최신 Notion 기록과 코드 증거로 판단한다.
+
+최종 서버는 외부 패키지 없이 파일 업로드·목록·다운로드를 제공하고, 크기 제한·파일명 검증·Stream 오류·연결 중단·타임아웃·정상 종료를 처리한다. 실험용 대용량 파일과 업로드 데이터는 Git에 포함하지 않는다.
+
+목표 구조는 src/{server,routes,file-service,errors,shutdown}.js, experiments/{event-loop,cpu-blocking,worker,stream-memory}.js, tests/server.test.js, package.json, README.md다. 필요한 파일을 학습 단계에 맞춰 작성한다.
+
+## Postman CLI
+
+<!-- postman-cli:installation:start -->
+Postman CLI is installed on the original device at /Users/metabuild/.local/bin/postman. On another computer, check availability before using it. This curriculum uses Node.js Core and curl by default.
+<!-- postman-cli:installation:end -->

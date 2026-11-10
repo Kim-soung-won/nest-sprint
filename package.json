@@ -1,0 +1,11 @@
+{
+  "name": "nodejs-sprint",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Node.js Core runtime learning lab",
+  "type": "module",
+  "scripts": {
+    "experiment:event-loop": "node experiments/event-loop.js",
+    "test": "node --test"
+  }
+}
