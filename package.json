@@ -7,6 +7,7 @@
   "scripts": {
     "experiment:event-loop": "node experiments/event-loop.js",
     "experiment:cpu-blocking": "node experiments/cpu-blocking.js",
+    "server": "node src/server.js",
     "test": "node --test"
   }
 }
