@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "experiment:event-loop": "node experiments/event-loop.js",
+    "experiment:cpu-blocking": "node experiments/cpu-blocking.js",
     "test": "node --test"
   }
 }
